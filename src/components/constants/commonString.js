@@ -1,7 +1,8 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import AddIcon from "@mui/icons-material/Add";
-
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
 export const TAB_NAMES = [
   {
     id: 1,
@@ -18,6 +19,28 @@ export const TAB_NAMES = [
     name: "addIcon",
     icon: AddIcon,
   },
+];
+export const ADMIN_TAB_NAMES = [
+  {
+    id: 1,
+    name: "menuIcon",
+    icon: MenuIcon,
+  },
+  {
+    id: 2,
+    name: "personIcon",
+    icon: PersonIcon,
+  },
+  {
+    id: 3,
+    name: "slotIcon",
+    icon: AccessTimeOutlinedIcon,
+  },
+  {
+    id: 4,
+    name: "priceIcon",
+    icon: PaymentsOutlinedIcon,
+  }
 ];
 
 export const SERVICE_HISTORY_CONSTANT = [
@@ -46,4 +69,12 @@ export const SERVICE_HISTORY_DATA = [
     location: "Location2",
     details: "Details2",
   },
+];
+export const LIVE_REQ_CONSTANT = [
+  { id: "Customer", label: "Customer.", align: "center" },
+  { id: "Vehicle", label: "Reg No", align: "center" },
+  { id: "Services", label: "Services", align: "center" },
+  { id: "Status", label: "Status", align: "center" },
+  { id: "Cost", label: "Cost", align: "center" },
+  { id: "Summary", label: "Summary", align: "center" },
 ];
