@@ -5,7 +5,7 @@ export const FONT_SIZE = {
     large: 18,
     extraLarge: 20,
     xxl: 22,
-    heading1: 32,
-    heading2: 30,
+    heading1: 26,
+    heading2: 24,
   };
   

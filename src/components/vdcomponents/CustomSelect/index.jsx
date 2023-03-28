@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { COLORS } from "../../themes/Colors";
+import { FONT_SIZE } from "../../themes/FontSize";
 
 const CustomSelect = ({
   menuItems,
@@ -9,11 +11,14 @@ const CustomSelect = ({
   label,
   handleChange,
   formStyle,
+  labelStyle,
   ...rest
 }) => {
   return (
-    <FormControl sx={formStyle}>
-      <InputLabel id="select-helper-label">{inputLabelText}</InputLabel>
+    <FormControl variant="standard" sx={formStyle}>
+      <InputLabel id="select-helper-label" sx={labelStyle}>
+        {inputLabelText}
+      </InputLabel>
       <Select
         {...rest}
         labelId="select-helper-label"
@@ -21,6 +26,15 @@ const CustomSelect = ({
         value={value}
         label={label}
         onChange={handleChange}
+        sx={{
+          borderBottom: `1px solid ${COLORS.white}`,
+          color: COLORS.white,
+          py: 1,
+          fontSize: FONT_SIZE.large,
+          "& .MuiSelect-root.Mui-focused": {
+            color: COLORS.white,
+          },
+        }}
       >
         {menuItems.map((item) => (
           <MenuItem key={item} value={item}>
@@ -41,6 +55,7 @@ CustomSelect.propTypes = {
   label: PropTypes.string,
   handleChange: PropTypes.func,
   formStyle: PropTypes.object,
+  labelStyle: PropTypes.object,
 };
 
 CustomSelect.defaultProps = {
@@ -50,4 +65,5 @@ CustomSelect.defaultProps = {
   label: "",
   handleChange: "",
   formStyle: {},
+  labelStyle: {},
 };

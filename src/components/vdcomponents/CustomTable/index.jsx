@@ -45,9 +45,10 @@ const CustomTable = ({
                   align={column.align || "inherit"}
                   style={{
                     minWidth: column.minWidth || 170,
-                    backgroundColor: "rgba(217, 217, 217, 0.22)",
+                    backgroundColor: "#36454F",
                     color: "#fff",
-                    fontSize: 16,
+                    fontSize: 18,
+                    letterSpacing: 0.4,
                   }}
                 >
                   {column.label}
@@ -66,19 +67,9 @@ const CustomTable = ({
                         key={column.id}
                         align={column.align}
                         sx={{
-                          color:
-                            value === "declined" || value === "checkout"
-                              ? COLORS.bright_red
-                              : value === "approved"
-                              ? COLORS.green
-                              : value === "extended"
-                              ? COLORS.blue_azure
-                              : value === "pending"
-                              ? COLORS.yellow
-                              : COLORS.white,
+                          color: COLORS.white,
                           fontSize: 16,
-                          textTransform:
-                            column.id === "email" ? "none" : "capitalize",
+                          textTransform: "capitalize",
                         }}
                       >
                         {typeof value === "undefined"

@@ -20,6 +20,7 @@ const Profile = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [profileInfo, setProfileInfo] = useState({
+    profileImg: "",
     fName: "",
     lName: "",
     email: "",
@@ -28,6 +29,23 @@ const Profile = () => {
     city: "",
     addressProf: "",
   });
+
+  const customInputSxStyle = {
+    borderBottom: `1px solid ${COLORS.white}`,
+    color: COLORS.white,
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: COLORS.white,
+    },
+  };
+
+  const customInputLabelProps = {
+    sx: {
+      color: COLORS.white,
+      textTransform: "capitalize",
+    },
+  };
+
+  const inputProps = { style: { color: "white" } };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -73,64 +91,255 @@ const Profile = () => {
   };
 
   return (
-    <Container
-      maxWidth={false}
-      disableGutters
-      style={{
-        background: "linear-gradient(90deg, #72C6EF 0%, #004E8F 100%)",
-        display: "flex",
-        flexDirection: "row",
-      }}
-    >
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="Users tabs"
-        orientation="vertical"
-        sx={{
-          backgroundColor: COLORS.blue_shade,
-          width: { md: "6%", lg: "5%" },
-          height: "100vh",
-          flexDirection: "inherit",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {TAB_NAMES.map((item) => {
-          return (
-            <Tab
-              key={item.id}
-              icon={<item.icon sx={{ fontSize: 34, color: COLORS.white }} />}
-              aria-label={item.name}
-            />
-          );
-        })}
-      </Tabs>
+    <Container maxWidth={false} sx={{ display: "flex" }}>
+      <Typography sx={{ ...fontStyle() }}>Profile</Typography>
       <Container
         maxWidth={false}
-        sx={{ display: "flex", flexDirection: "column" }}
+        disableGutters
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
       >
-        <Typography sx={{ ...fontStyle() }}>Welcome, User</Typography>
-        <Typography sx={{ ...fontStyle(), lineHeight: 1 }}>
-          Service History
-        </Typography>
-        <Container
-          maxWidth={false}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
-        >
-          <CustomTable
-            columns={SERVICE_HISTORY_CONSTANT}
-            rows={SERVICE_HISTORY_DATA}
-            page={page}
-            rowsPerPage={rowsPerPage}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Container>
+        <CustomCard maxWidth={"md"} style={{ padding: 20 }}>
+          <Container
+            maxWidth={false}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                display: "inline-block",
+                position: "relative",
+                cursor: "pointer",
+              }}
+            >
+              {!profileInfo.profileImg ? (
+                <>
+                  <AccountCircleIcon
+                    sx={{ fontSize: 120, color: COLORS.white }}
+                  />
+                  <Typography sx={{ ...fontStyle(undefined, 20, undefined) }}>
+                    Upload Photo
+                  </Typography>
+                </>
+              ) : (
+                <img
+                  src={profileInfo.profileImg}
+                  style={{
+                    width: 140,
+                    height: 140,
+                    borderRadius: "50%",
+                    objectFit: "contain",
+                  }}
+                />
+              )}
+              <input
+                type="file"
+                accept="image/png, image/jpeg"
+                style={{
+                  opacity: 0,
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                }}
+                onChange={(e) =>
+                  setProfileInfo({
+                    ...profileInfo,
+                    profileImg:
+                      e.target.value && URL.createObjectURL(e.target.files[0]),
+                  })
+                }
+              />
+            </div>
+          </Container>
+          <Container
+            maxWidth={false}
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <CustomInput
+              margin="normal"
+              required
+              fullWidth={false}
+              label="First Name"
+              name="fName"
+              variant="standard"
+              value={profileInfo.fName}
+              onChange={(event) => handleFirstNameChange(event)}
+              sx={customInputSxStyle}
+              InputLabelProps={customInputLabelProps}
+              inputProps={inputProps}
+            />
+            <CustomInput
+              margin="normal"
+              required
+              fullWidth={false}
+              label="Last Name"
+              name="lName"
+              variant="standard"
+              value={profileInfo.lName}
+              onChange={(event) => handleLastNameChange(event)}
+              sx={customInputSxStyle}
+              InputLabelProps={customInputLabelProps}
+              inputProps={inputProps}
+            />
+          </Container>
+          <Container
+            maxWidth={false}
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <CustomInput
+              margin="normal"
+              required
+              fullWidth={false}
+              label="Email"
+              name="email"
+              variant="standard"
+              value={profileInfo.email}
+              onChange={(event) => handleEmailChange(event)}
+              sx={customInputSxStyle}
+              InputLabelProps={customInputLabelProps}
+              inputProps={inputProps}
+            />
+            <CustomInput
+              margin="normal"
+              required
+              fullWidth={false}
+              label="Phone No"
+              name="phone"
+              variant="standard"
+              value={profileInfo.phoneNo}
+              onChange={(event) => handlePhoneChange(event)}
+              sx={customInputSxStyle}
+              InputLabelProps={customInputLabelProps}
+              inputProps={inputProps}
+            />
+          </Container>
+          <Container
+            maxWidth={false}
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <CustomInput
+              margin="normal"
+              required
+              fullWidth={false}
+              label="Address"
+              name="address"
+              variant="standard"
+              value={profileInfo.address}
+              onChange={(event) => handleAddressChange(event)}
+              sx={customInputSxStyle}
+              InputLabelProps={customInputLabelProps}
+              inputProps={inputProps}
+            />
+            <CustomInput
+              margin="normal"
+              required
+              fullWidth={false}
+              label="City"
+              name="city"
+              variant="standard"
+              value={profileInfo.city}
+              onChange={(event) => handleCityChange(event)}
+              sx={customInputSxStyle}
+              InputLabelProps={customInputLabelProps}
+              inputProps={inputProps}
+            />
+          </Container>
+          <Container
+            maxWidth={false}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+              paddingTop: 4,
+            }}
+          >
+            <div
+              style={{
+                display: "inline-block",
+                position: "relative",
+                cursor: "pointer",
+              }}
+            >
+              {!profileInfo.addressProf ? (
+                <>
+                  <ContactEmergencyIcon
+                    sx={{ fontSize: 120, color: COLORS.white }}
+                  />
+                  <Typography sx={{ ...fontStyle(undefined, 20, undefined) }}>
+                    Govt Id
+                  </Typography>
+                </>
+              ) : (
+                <img
+                  src={profileInfo.addressProf}
+                  style={{
+                    width: 140,
+                    height: 140,
+                    objectFit: "contain",
+                  }}
+                />
+              )}
+              <input
+                type="file"
+                accept="image/png, image/jpeg"
+                style={{
+                  opacity: 0,
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                }}
+                onChange={(e) =>
+                  setProfileInfo({
+                    ...profileInfo,
+                    addressProf:
+                      e.target.value && URL.createObjectURL(e.target.files[0]),
+                  })
+                }
+              />
+            </div>
+          </Container>
+          <Button
+            variant="outlined"
+            sx={{
+              width: 180,
+              height: 44,
+              borderRadius: 2,
+              backgroundColor: "#D9D9D95E",
+              color: COLORS.white,
+              textTransform: "capitalize",
+              letterSpacing: 0.4,
+              fontSize: FONT_SIZE.medium,
+              "&:hover": { backgroundColor: "#D9D9D95E" },
+              marginTop: 2,
+            }}
+          >
+            Submit
+          </Button>
+        </CustomCard>
       </Container>
     </Container>
   );

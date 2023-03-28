@@ -1,6 +1,7 @@
 import { Container } from "@mui/system";
 import PropTypes from "prop-types";
 import React from "react";
+import { COLORS } from "../../themes/Colors";
 
 const CustomCard = ({ disableGutters, maxWidth, children, ...rest }) => {
   return (
